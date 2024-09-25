@@ -12,7 +12,7 @@ int main()
 
     while (number > 0)
     {
-        arrNum[i] = number % 2;
+        arrNum[i] = number % 2; 
         number /= 2;
         i++;
     }
