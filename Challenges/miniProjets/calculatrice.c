@@ -36,6 +36,12 @@ int main()
         printf("\n\n\t ==> Choisissez une option : ");
         scanf("%d", &option);
 
+        if (option > 9 || option < 1)
+        {
+            printf("\n\n\t ==> Option invalide");
+            break;
+        }
+
         switch (option)
         {
         case 1:
