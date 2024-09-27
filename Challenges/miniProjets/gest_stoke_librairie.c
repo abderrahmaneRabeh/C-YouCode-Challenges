@@ -6,7 +6,7 @@ int main()
 {
     int option;
     char reponse = 'y';
-    int livreAjoute = 0; // Number of books added so far
+    int livreAjoute = 0;
 
     char titre[50][25];
     char auteur[50][25];
@@ -29,22 +29,22 @@ int main()
 
         printf("\n\t=> Choisissez une option : ");
         scanf("%d", &option);
-        getchar(); // Consume the leftover newline after scanf
+        getchar();
 
         switch (option)
         {
-        case 1: // Add a book
+        case 1:
             system("cls");
             printf("\n\n");
             printf("========-- Ajouter un livre au stock --========\n");
 
             printf("\nTitre : ");
             fgets(titre[livreAjoute], 25, stdin);
-            titre[livreAjoute][strcspn(titre[livreAjoute], "\n")] = 0; // Remove newline
+            titre[livreAjoute][strcspn(titre[livreAjoute], "\n")] = 0;
 
             printf("\nAuteur : ");
             fgets(auteur[livreAjoute], 25, stdin);
-            auteur[livreAjoute][strcspn(auteur[livreAjoute], "\n")] = 0; // Remove newline
+            auteur[livreAjoute][strcspn(auteur[livreAjoute], "\n")] = 0;
 
             printf("\nQuantite : ");
             scanf("%d", &quantite[livreAjoute]);
@@ -52,12 +52,12 @@ int main()
             printf("\nPrix : ");
             scanf("%f", &prix[livreAjoute]);
 
-            livreAjoute++; // Increment the number of books
-            getchar();     // Consume newline after scanf
+            livreAjoute++;
+            getchar();
             printf("\nLivre ajoute avec succes !\n");
             break;
 
-        case 2: // Display all books
+        case 2:
             system("cls");
             printf("\n\n");
             if (livreAjoute == 0)
@@ -81,14 +81,14 @@ int main()
             }
             break;
 
-        case 3: // Update book quantity
+        case 3:
         {
             system("cls");
             char titreTemp[25];
             printf("\n\n========-- Mettre à jour la quantité d'un livre --========\n");
             printf("Titre : ");
             fgets(titreTemp, 25, stdin);
-            titreTemp[strcspn(titreTemp, "\n")] = 0; // Remove newline
+            titreTemp[strcspn(titreTemp, "\n")] = 0;
 
             int found = 0;
             for (int i = 0; i < livreAjoute; i++)
@@ -107,25 +107,25 @@ int main()
             {
                 printf("\nLivre non trouvé.\n");
             }
-            getchar(); // Consume newline after scanf
+            getchar();
 
             break;
         }
 
-        case 4: // Delete a book
+        case 4:
         {
             char titreTemp[25];
             printf("\n\n========-- Supprimer un livre du stock --========\n");
             printf("Titre : ");
             fgets(titreTemp, 25, stdin);
-            titreTemp[strcspn(titreTemp, "\n")] = 0; // Remove newline
+            titreTemp[strcspn(titreTemp, "\n")] = 0;
 
             int found = 0;
             for (int i = 0; i < livreAjoute; i++)
             {
                 if (strcmp(titre[i], titreTemp) == 0)
                 {
-                    // Shift all books after the deleted one
+
                     for (int j = i; j < livreAjoute - 1; j++)
                     {
                         strcpy(titre[j], titre[j + 1]);
@@ -133,7 +133,7 @@ int main()
                         quantite[j] = quantite[j + 1];
                         prix[j] = prix[j + 1];
                     }
-                    livreAjoute--; // Decrement the total number of books
+                    livreAjoute--;
                     found = 1;
                     printf("\nLivre supprimé avec succès.\n");
                     break;
@@ -147,7 +147,7 @@ int main()
             break;
         }
 
-        case 5: // Display total quantity of books in stock
+        case 5:
         {
             int totalLivres = 0;
             for (int i = 0; i < livreAjoute; i++)
@@ -158,7 +158,7 @@ int main()
             break;
         }
 
-        case 6: // Quit
+        case 6:
             printf("Quitter\n");
             exit(0);
 
@@ -169,7 +169,7 @@ int main()
 
         printf("\nContinuer ? (y) / (n) : ");
         scanf(" %c", &reponse);
-        getchar(); // Consume newline after scanf
+        getchar();
     }
 
     return 0;
