@@ -43,7 +43,7 @@ int main()
             titre[livreAjoute][strcspn(titre[livreAjoute], "\n")] = 0;
 
             printf("\nAuteur : ");
-            fgets(auteur[livreAjoute], 25, stdin); //sfgs fsgdf\n
+            fgets(auteur[livreAjoute], 25, stdin); // sfgs fsgdf\n
 
             auteur[livreAjoute][strcspn(auteur[livreAjoute], "\n")] = 0;
 
@@ -142,7 +142,7 @@ int main()
             }
 
             if (!found)
-            {   
+            {
                 printf("\nLivre non trouvé.\n");
             }
             break;
