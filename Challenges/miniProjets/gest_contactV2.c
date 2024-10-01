@@ -4,12 +4,16 @@
 
 struct Contact
 {
+    int id[25];
     char nom[25][25];
     int num_de_tele[25];
     char email[25][25];
 };
 
 struct Contact contact = {
+    .id = {
+        1,2,3,4,5,6,7,8,9,10
+    },
     .nom = {
         "Alice", "Bob", "Charlie", "David", "Eva",
         "Frank", "Grace", "Hannah", "Isaac", "Jack"
@@ -32,8 +36,11 @@ int ajouterSimpleContact(int Nbr_contact);
 void afficherSimple(int Nbr_contact);
 void afficherASC(int Nbr_contact);
 void afficherDESC(int Nbr_contact);
+void afficherInterval(int Nbr_contact);
 
-void RechercherContact(int Nbr_contact);
+void RechercherContactParNom(int Nbr_contact);
+void RechercherContactParId(int Nbr_contact);
+
 void modiferContact(int Nbr_contact);
 int supprimerContact(int Nbr_contact);
 
@@ -95,8 +102,9 @@ int main()
             printf("\n\n");
 
             printf("\n\n\t|1|-> Affichage Simple");
-            printf("\n\n\t|2|-> Affichage ASC");
-            printf("\n\n\t|3|-> Affichage DESC");
+            printf("\n\n\t|2|-> Affichage a l'interval donnee");
+            printf("\n\n\t|3|-> Affichage ASC");
+            printf("\n\n\t|4|-> Affichage DESC");
 
             int type_affichage;
             printf("\n\n\t=> Choisissez comment d'afficher  : ");
@@ -107,17 +115,42 @@ int main()
                 afficherSimple(Nombre_de_contact);
             }else if(type_affichage == 2){
 
+                afficherInterval(Nombre_de_contact);
+            }else if(type_affichage == 3){
+
                 afficherASC(Nombre_de_contact);
-            }else if(type_affichage == 2){
-                
+            }else if(type_affichage == 4){
+
                 afficherDESC(Nombre_de_contact);
             }else{
-                printf("\n\n\t->Invalid operator");
+                printf("\n\n\t->Invalid choix");
             }
             
             break;
         case 3:
-            RechercherContact(Nombre_de_contact);
+            system("cls");
+
+            printf("\n\n");
+            printf("------|   Recherche un Contact   |-----");
+            printf("\n\n");
+
+            printf("\n\n\t|1|-> Recherche Par Nom");
+            printf("\n\n\t|2|-> Recherche Par Id");
+
+            int type_recherche;
+            printf("\n\n\t=> Choisissez comment Rechercher  : ");
+            scanf("%d", &type_recherche);
+
+            if(type_recherche == 1){
+
+                RechercherContactParNom(Nombre_de_contact);
+            }else if(type_recherche == 2){
+                
+                RechercherContactParId(Nombre_de_contact);
+            }else{
+                printf("\n\n\t->Invalid choix");
+            }
+
             break;
         case 4:
             modiferContact(Nombre_de_contact);
@@ -164,6 +197,8 @@ int ajouterContactMultiple(int Nbr_contact){
         printf("\nDonner email address | %d | : ", Nbr_contact + 1);
         scanf("%s", &contact.email[Nbr_contact]);
 
+        contact.id[Nbr_contact] = Nbr_contact + 1;
+
         printf("\n\n---\n");
 
         Nbr_contact++;
@@ -192,6 +227,7 @@ int ajouterSimpleContact(int Nbr_contact){
     printf("\nDonner email address | %d | : ", Nbr_contact + 1);
     scanf("%s", &contact.email[Nbr_contact]);
 
+    contact.id[Nbr_contact] = Nbr_contact + 1;
     Nbr_contact++;
 
     printf("\n\n\t->Contact ajouter !");
@@ -210,6 +246,7 @@ void afficherSimple(int Nbr_contact){
     for (int i = 0; i < Nbr_contact; i++)
     {
         printf("\n\n====Contact | %d |==========", i + 1);
+        printf("\n\n==>Id -->  %d", contact.id[i]);
         printf("\n\n==>Nom -->  %s", contact.nom[i]);
         printf("\n\n==>Tele -->  %d", contact.num_de_tele[i]);
         printf("\n\n==>Email -->  %s", contact.email[i]);
@@ -217,6 +254,40 @@ void afficherSimple(int Nbr_contact){
     }
 
 };
+
+void afficherInterval(int Nbr_contact){
+
+    system("cls");
+
+    printf("\n\n");
+    printf("------|   Affichage a l'interval   |-----");
+    printf("\n\n");
+
+    int start, end;
+
+    printf("\n\n->Donner l'indice commencer : ");
+    scanf("%d", &start);
+
+    printf("\n\n->Donner l'indice fin : ");
+    scanf("%d", &end);
+
+    if(end <= Nbr_contact && start >= 0){
+
+        for (int i = start - 1; i <= end - 1; i++)
+        {
+            printf("\n\n====Contact | %d |==========", i + 1);
+            printf("\n\n==>Id -->  %d", contact.id[i]);
+            printf("\n\n==>Nom -->  %s", contact.nom[i]);
+            printf("\n\n==>Tele -->  %d", contact.num_de_tele[i]);
+            printf("\n\n==>Email -->  %s", contact.email[i]);
+            printf("\n\n===========================\n");
+        }
+    }else{
+
+        printf("\n\n->l'interval incorrect !");
+    }
+    
+}
 
 void afficherASC(int Nbr_contact){
 
@@ -226,12 +297,12 @@ void afficherDESC(int Nbr_contact){
 
 }
 
-void RechercherContact(int Nbr_contact){
+void RechercherContactParNom(int Nbr_contact){
     
     system("cls");
 
     printf("\n\n");
-    printf("------|   Rechercher un Contact   |-----");
+    printf("------|   Rechercher un Contact Par Nom   |-----");
     printf("\n\n");
 
     int found = 0;
@@ -245,6 +316,42 @@ void RechercherContact(int Nbr_contact){
         if (strcmp(temporaire_nom, contact.nom[i]) == 0)
         {
             printf("\n\n====Contact | %d |==========", i + 1);
+            printf("\n\n==>Id -->  %d", contact.id[i]);
+            printf("\n\n==>Nom -->  %s", contact.nom[i]);
+            printf("\n\n==>Tele -->  %d", contact.num_de_tele[i]);
+            printf("\n\n==>Email -->  %s", contact.email[i]);
+            printf("\n\n===========================\n");
+            found = 1;
+            break;
+        }
+    }
+
+    if (found != 1)
+    {
+        printf("\n\n->Le Contact est indesponible");
+    }
+}
+
+void RechercherContactParId(int Nbr_contact){
+
+    system("cls");
+
+    printf("\n\n");
+    printf("------|   Rechercher un Contact Par Id   |-----");
+    printf("\n\n");
+
+    int found = 0;
+    int id;
+
+    printf("\n\nDonner le Id de contact a rechercher : ");
+    scanf("%d", &id);
+
+    for (int i = 0; i < Nbr_contact; i++)
+    {
+        if (id == contact.id[i])
+        {
+            printf("\n\n====Contact | %d |==========", i + 1);
+            printf("\n\n==>id -->  %d", contact.id[i]);
             printf("\n\n==>Nom -->  %s", contact.nom[i]);
             printf("\n\n==>Tele -->  %d", contact.num_de_tele[i]);
             printf("\n\n==>Email -->  %s", contact.email[i]);
@@ -319,18 +426,32 @@ int supprimerContact(int Nbr_contact){
     {
         if (strcmp(temporaire_nom, contact.nom[i]) == 0)
         {
-            for (int j = i; j < Nbr_contact - 1; j++)
-            {
-                strcpy(contact.nom[j], contact.nom[j + 1]);
-                strcpy(contact.email[j], contact.email[j + 1]);
-                contact.num_de_tele[j] = contact.num_de_tele[j + 1];
-            }
 
-            found = 1;
-            Nbr_contact--;
+                char supprimer;
+                printf("\n\n\t-> etes-vous sur de vouloir supprimer ce contact ? (y) / (n) : ");
+                scanf(" %c", &supprimer);
 
-            printf("\n\n\t->Contact Supprimer !");
-            break;
+                if(supprimer == 'y' || supprimer == 'Y'){
+
+                    for (int j = i; j < Nbr_contact - 1; j++)
+                    {
+
+                        strcpy(contact.nom[j], contact.nom[j + 1]);
+                        strcpy(contact.email[j], contact.email[j + 1]);
+                        contact.num_de_tele[j] = contact.num_de_tele[j + 1];
+                    }
+
+                    found = 1;
+                    Nbr_contact--;
+
+                    printf("\n\n\t->Contact Supprimer !");
+                    break;
+                }else{
+
+                    found = 1;
+                    printf("\n\n\t->Contact N'est pas Supprimer !");
+                    break;
+                }
         }
     }
 
