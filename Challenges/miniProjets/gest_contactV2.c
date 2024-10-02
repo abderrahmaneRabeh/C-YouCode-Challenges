@@ -47,7 +47,7 @@ int main()
         system("cls");
 
         printf("\n\n");
-        printf("------|   Gestion de Contacts   |-----");
+        printf("---------------------|   Gestion de Contacts   |-------------------");
         printf("\n\n\t|1|-> Ajouter un contact");
         printf("\n\n\t|2|-> Afficher tout les contact");
         printf("\n\n\t|3|-> Rechercher un Contact");
@@ -65,7 +65,7 @@ int main()
             system("cls");
 
             printf("\n\n");
-            printf("------|   Ajouter un Contacts   |-----");
+            printf("---------------------|   Ajouter un Contacts   |-------------------");
             printf("\n\n");
 
             int simple_multiple;
@@ -95,7 +95,7 @@ int main()
             system("cls");
 
             printf("\n\n");
-            printf("------|   Afficher tout Contacts   |-----");
+            printf("---------------------|   Afficher tout Contacts   |-------------------");
             printf("\n\n");
 
             printf("\n\n\t|1|-> Affichage Simple");
@@ -137,7 +137,7 @@ int main()
             system("cls");
 
             printf("\n\n");
-            printf("------|   Recherche un Contact   |-----");
+            printf("---------------------|   Recherche un Contact   |-------------------");
             printf("\n\n");
 
             printf("\n\n\t|1|-> Recherche Par Nom");
@@ -173,17 +173,43 @@ int main()
             system("cls");
 
             printf("\n\n");
-            printf("------|   Statistiques   |-----");
+            printf("---------------------|   Statistiques   |-------------------");
             printf("\n\n");
 
             printf("\n\n\t|1|-> Avg");
             printf("\n\n\t|2|-> Min");
             printf("\n\n\t|3|-> Max");
-            printf("\n\n\t|4|-> ");
+            printf("\n\n\t|4|-> les numbres avec 06 et 07");
 
-            // int type_recherche;
-            // printf("\n\n\t=> Choisissez comment Rechercher  : ");
-            // scanf("%d", &type_recherche);
+            int type_statistic;
+
+            printf("\n\n\t=> Choisissez un option  : ");
+            scanf("%d", &type_statistic);
+
+            if (type_statistic == 1)
+            {
+
+                avg(Nombre_de_contact);
+            }
+            else if (type_statistic == 2)
+            {
+
+                min(Nombre_de_contact);
+            }
+            else if (type_statistic == 3)
+            {
+
+                max(Nombre_de_contact);
+            }
+            else if (type_statistic == 4)
+            {
+
+                check_number(Nombre_de_contact);
+            }
+            else
+            {
+                printf("\n\n\t->Invalid choix");
+            }
 
             break;
         case 7:
@@ -207,7 +233,7 @@ int ajouterContactMultiple(int Nbr_contact)
     system("cls");
 
     printf("\n\n");
-    printf("------|   Ajouter Multiple Contacts   |-----");
+    printf("---------------------|   Ajouter Multiple Contacts   |-------------------");
     printf("\n\n");
 
     int n;
@@ -243,7 +269,7 @@ int ajouterSimpleContact(int Nbr_contact)
     system("cls");
 
     printf("\n\n");
-    printf("------|   Ajouter Simple Contact   |-----");
+    printf("---------------------|   Ajouter Simple Contact   |-------------------");
     printf("\n\n");
 
     printf("\nDonner nom | %d | : ", Nbr_contact + 1);
@@ -269,7 +295,7 @@ void afficherSimple(int Nbr_contact)
     system("cls");
 
     printf("\n\n");
-    printf("------|   Affichage Simple   |-----");
+    printf("---------------------|   Affichage Simple   |-------------------");
     printf("\n\n");
 
     for (int i = 0; i < Nbr_contact; i++)
@@ -289,7 +315,7 @@ void afficherInterval(int Nbr_contact)
     system("cls");
 
     printf("\n\n");
-    printf("------|   Affichage a l'interval   |-----");
+    printf("---------------------|   Affichage a l'interval   |-------------------");
     printf("\n\n");
 
     int start, end;
@@ -334,7 +360,7 @@ void RechercherContactParNom(int Nbr_contact)
     system("cls");
 
     printf("\n\n");
-    printf("------|   Rechercher un Contact Par Nom   |-----");
+    printf("---------------------|   Rechercher un Contact Par Nom   |-------------------");
     printf("\n\n");
 
     int found = 0;
@@ -370,7 +396,7 @@ void RechercherContactParId(int Nbr_contact)
     system("cls");
 
     printf("\n\n");
-    printf("------|   Rechercher un Contact Par Id   |-----");
+    printf("---------------------|   Rechercher un Contact Par Id   |-------------------");
     printf("\n\n");
 
     int found = 0;
@@ -405,7 +431,7 @@ void modiferContact(int Nbr_contact)
     system("cls");
 
     printf("\n\n");
-    printf("------|   Modifier un Contact   |-----");
+    printf("---------------------|   Modifier un Contact   |-------------------");
     printf("\n\n");
 
     int found = 0;
@@ -448,7 +474,7 @@ int supprimerContact(int Nbr_contact)
     system("cls");
 
     printf("\n\n");
-    printf("------|   Supprimer un Contact   |-----");
+    printf("---------------------|   Supprimer un Contact   |-------------------");
     printf("\n\n");
 
     int found = 0;
