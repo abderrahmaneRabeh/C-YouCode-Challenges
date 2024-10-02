@@ -175,13 +175,12 @@ int main()
             printf("\n\n\t|1|-> Avg");
             printf("\n\n\t|2|-> Min");
             printf("\n\n\t|3|-> Max");
-            printf("\n\n\t|4|-> ");
+            printf("\n\n\t|4|-> les numbres avec 06 et 07");
 
-            int type_recherche;
-            printf("\n\n\t=> Choisissez comment Rechercher  : ");
-            scanf("%d", &type_recherche);
+            int type_statistic;
+            printf("\n\n\t=> Choisissez un option  : ");
+            scanf("%d", &type_statistic);
 
-            statistiques(Nombre_de_contact);
             break;
         case 7:
             printf("\n\n");
@@ -316,9 +315,75 @@ void afficherInterval(int Nbr_contact){
 
 void afficherASC(int Nbr_contact){
 
+    system("cls");
+    
+    printf("\n\n");
+    printf("------|   Affichage ASC   |-----");
+
+    printf("\n\n");
+
+    char temp[25];
+
+    for(int i = 0; i < Nbr_contact; i++){
+
+        for (int j = 0; j < Nbr_contact - i - 1; j++){
+
+            if (strcasecmp(contact.nom[j], contact.nom[j + 1]) > 0) {
+
+                strcpy(temp, contact.nom[j]);
+                strcpy(contact.nom[j], contact.nom[j + 1]);
+                strcpy(contact.nom[j + 1], temp);
+            }
+        }
+
+    }
+
+    for (int i = 0; i < Nbr_contact; i++){
+
+        printf("\n\n====Contact | %d |==========", i + 1);
+        printf("\n\n==>Id -->  %d", contact.id[i]);
+        printf("\n\n==>Nom -->  %s", contact.nom[i]);
+        printf("\n\n==>Tele -->  %s", contact.num_de_tele[i]);
+        printf("\n\n==>Email -->  %s", contact.email[i]);
+        printf("\n\n===========================\n");
+    }
+
 }
 
 void afficherDESC(int Nbr_contact){
+
+    system("cls");
+    
+    printf("\n\n");
+    printf("------|   Affichage DESC   |-----");
+
+    printf("\n\n");
+
+    char temp[25];
+
+    for(int i = 0; i < Nbr_contact; i++){
+
+        for (int j = 0; j < Nbr_contact - i - 1; j++){
+
+            if (strcasecmp(contact.nom[j], contact.nom[j + 1]) < 0) {
+
+                strcpy(temp, contact.nom[j]);
+                strcpy(contact.nom[j], contact.nom[j + 1]);
+                strcpy(contact.nom[j + 1], temp);
+            }
+        }
+
+    }
+
+    for (int i = 0; i < Nbr_contact; i++){
+        
+        printf("\n\n====Contact | %d |==========", i + 1);
+        printf("\n\n==>Id -->  %d", contact.id[i]);
+        printf("\n\n==>Nom -->  %s", contact.nom[i]);
+        printf("\n\n==>Tele -->  %s", contact.num_de_tele[i]);
+        printf("\n\n==>Email -->  %s", contact.email[i]);
+        printf("\n\n===========================\n");
+    }
 
 }
 
@@ -489,18 +554,6 @@ int supprimerContact(int Nbr_contact){
     return Nbr_contact;
 }
 
-void statistiques(int Nbr_contact){
-
-    system("cls");
-    
-    printf("\n\n");
-    printf("------|   Statistiques   |-----");
-
-    
-    printf("\n\n");
-
-
-}
 void avg(int Nbr_contact){
     system("cls");
     
