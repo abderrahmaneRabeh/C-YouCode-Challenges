@@ -490,13 +490,156 @@ int Supprimer_Reservation(int Nbr_reservation)
 
 void tri_reservation_parNom_croissant(int Nbr_reservation)
 {
+
+    char temporaraire_nom[maxContent];
+    char temporaraire_prenom[maxContent];
+
+    char temporaraire_tele[maxContent];
+    char temporaraire_status[maxContent];
+
+    char temporaraire_dateReservation[maxContent];
+
+    int temporaraire_id;
+    int temporaraire_age;
+
+    for(int i = 0; i < Nbr_reservation; i++){
+
+           for(int j = i + 1; j < Nbr_reservation; j++){
+
+                if(strcasecmp(reservation.nom[i], reservation.nom[j]) > 0){
+
+                    strcpy(temporaraire_nom, reservation.nom[i]);
+                    strcpy(reservation.nom[i], reservation.nom[j]);
+                    strcpy(reservation.nom[j], temporaraire_nom);
+
+                    strcpy(temporaraire_prenom, reservation.prenom[i]);
+                    strcpy(reservation.prenom[i], reservation.prenom[j]);
+                    strcpy(reservation.prenom[j], temporaraire_prenom);
+
+                    strcpy(temporaraire_tele, reservation.tele[i]);
+                    strcpy(reservation.tele[i], reservation.tele[j]);
+                    strcpy(reservation.tele[j], temporaraire_tele);
+
+                    strcpy(temporaraire_dateReservation, reservation.dateReservation[i]);
+                    strcpy(reservation.dateReservation[i], reservation.dateReservation[j]);
+                    strcpy(reservation.dateReservation[j], temporaraire_dateReservation);
+
+                    strcpy(temporaraire_status, reservation.status[i]);
+                    strcpy(reservation.status[i], reservation.status[j]);
+                    strcpy(reservation.status[j], temporaraire_status);
+
+                    temporaraire_id = reservation.id[i];
+                    reservation.id[i] = reservation.id[j];
+                    reservation.id[j] = temporaraire_id;
+
+                    temporaraire_age = reservation.age[i];
+                    reservation.age[i] = reservation.age[j];
+                    reservation.age[j] = temporaraire_age;
+
+
+
+                }
+           }
+    }
+
+    afficher_tout_reservation(Nbr_reservation);
 }
+
 void tri_reservation_parNom_descroissant(int Nbr_reservation)
 {
+    char temporaraire_nom[maxContent];
+    char temporaraire_prenom[maxContent];
+
+    char temporaraire_tele[maxContent];
+    char temporaraire_status[maxContent];
+
+    char temporaraire_dateReservation[maxContent];
+
+    int temporaraire_id;
+    int temporaraire_age;
+
+    for(int i = 0; i < Nbr_reservation; i++){
+
+           for(int j = i + 1; j < Nbr_reservation; j++){
+
+                if(strcasecmp(reservation.nom[i], reservation.nom[j]) < 0){
+
+                    strcpy(temporaraire_nom, reservation.nom[i]);
+                    strcpy(reservation.nom[i], reservation.nom[j]);
+                    strcpy(reservation.nom[j], temporaraire_nom);
+
+                    strcpy(temporaraire_prenom, reservation.prenom[i]);
+                    strcpy(reservation.prenom[i], reservation.prenom[j]);
+                    strcpy(reservation.prenom[j], temporaraire_prenom);
+
+                    strcpy(temporaraire_tele, reservation.tele[i]);
+                    strcpy(reservation.tele[i], reservation.tele[j]);
+                    strcpy(reservation.tele[j], temporaraire_tele);
+
+                    strcpy(temporaraire_dateReservation, reservation.dateReservation[i]);
+                    strcpy(reservation.dateReservation[i], reservation.dateReservation[j]);
+                    strcpy(reservation.dateReservation[j], temporaraire_dateReservation);
+
+                    strcpy(temporaraire_status, reservation.status[i]);
+                    strcpy(reservation.status[i], reservation.status[j]);
+                    strcpy(reservation.status[j], temporaraire_status);
+
+                    temporaraire_id = reservation.id[i];
+                    reservation.id[i] = reservation.id[j];
+                    reservation.id[j] = temporaraire_id;
+
+                    temporaraire_age = reservation.age[i];
+                    reservation.age[i] = reservation.age[j];
+                    reservation.age[j] = temporaraire_age;
+
+                }
+           }
+    }
+
+    afficher_tout_reservation(Nbr_reservation);
 }
 
 void tri_reservation_parStatut(int Nbr_reservation)
 {
+
+
+    char status_donnerPar_utilisateur[maxContent];
+    int valid_Status = 0;
+
+    while (!valid_Status)
+    {
+        printf("\n\nDonner un Statut (valide, reporte, annule, traite) : ");
+        scanf("%s", status_donnerPar_utilisateur);
+        strcpy(status_donnerPar_utilisateur, strlwr(status_donnerPar_utilisateur));
+
+        if (strcmp(status_donnerPar_utilisateur, "valide") == 0 || strcmp(status_donnerPar_utilisateur, "reporte") == 0 ||
+            strcmp(status_donnerPar_utilisateur, "annule") == 0 || strcmp(status_donnerPar_utilisateur, "traite") == 0)
+        {
+            valid_Status = 1;
+        }
+        else
+        {
+            printf("\n\n\t-->Statut invalide. Veuillez entrer l'un des suivants: valide, reporte, annule, traite.\n");
+        }
+    }
+
+    
+    char temporaraire_status[maxContent];
+
+    for(int i = 0; i < Nbr_reservation; i++){
+
+        if(strcasecmp(reservation.nom[i], status_donnerPar_utilisateur) == 0){
+
+            strcpy(temporaraire_status, reservation.nom[i]);
+            strcpy(reservation.nom[i], reservation.nom[j]);
+            strcpy(reservation.nom[j], temporaraire_status);
+
+        }
+
+    }
+
+    afficher_tout_reservation(Nbr_reservation);
+
 }
 
 void statistiques_moyenne_age_reserve(int Nbr_reservation)
