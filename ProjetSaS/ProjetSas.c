@@ -622,23 +622,130 @@ void tri_reservation_parStatut(int Nbr_reservation)
             printf("\n\n\t-->Statut invalide. Veuillez entrer l'un des suivants: valide, reporte, annule, traite.\n");
         }
     }
-
     
-    char temporaraire_status[maxContent];
+    // char temporaraire_nom[maxContent];
+    // char temporaraire_prenom[maxContent];
+
+    // char temporaraire_tele[maxContent];
+    // char temporaraire_status[maxContent];
+
+    // char temporaraire_dateReservation[maxContent];
+
+    // int temporaraire_id;
+    // int temporaraire_age;
+
+    // for(int i = 0; i < Nbr_reservation; i++){
+
+    //     if (strcasecmp(reservation.status[i], status_donnerPar_utilisateur) < 0){
+
+    //         for(int j = i + 1; j < Nbr_reservation; j++){
+
+    //             if (strcasecmp(reservation.status[i], status_donnerPar_utilisateur) == 0) {
+
+    //                 strcpy(temporaraire_nom, reservation.nom[i]);
+    //                 strcpy(reservation.nom[i], reservation.nom[j]);
+    //                 strcpy(reservation.nom[j], temporaraire_nom);
+
+    //                 strcpy(temporaraire_prenom, reservation.prenom[i]);
+    //                 strcpy(reservation.prenom[i], reservation.prenom[j]);
+    //                 strcpy(reservation.prenom[j], temporaraire_prenom);
+
+    //                 strcpy(temporaraire_tele, reservation.tele[i]);
+    //                 strcpy(reservation.tele[i], reservation.tele[j]);
+    //                 strcpy(reservation.tele[j], temporaraire_tele);
+
+    //                 strcpy(temporaraire_dateReservation, reservation.dateReservation[i]);
+    //                 strcpy(reservation.dateReservation[i], reservation.dateReservation[j]);
+    //                 strcpy(reservation.dateReservation[j], temporaraire_dateReservation);
+
+    //                 strcpy(temporaraire_status, reservation.status[i]);
+    //                 strcpy(reservation.status[i], reservation.status[j]);
+    //                 strcpy(reservation.status[j], temporaraire_status);
+
+    //                 temporaraire_id = reservation.id[i];
+    //                 reservation.id[i] = reservation.id[j];
+    //                 reservation.id[j] = temporaraire_id;
+
+    //                 temporaraire_age = reservation.age[i];
+    //                 reservation.age[i] = reservation.age[j];
+    //                 reservation.age[j] = temporaraire_age;
+    //             }
+    //         }
+
+    //     }
+
+    // }
+     
+
+    int status_correspondantes[maxContent];
+    int rest_status[maxContent];
+
+    int corres_status = 0;
+    int autre_status = 0;
 
     for(int i = 0; i < Nbr_reservation; i++){
 
-        if(strcasecmp(reservation.nom[i], status_donnerPar_utilisateur) == 0){
+        if (strcmp(reservation.status[i], status_donnerPar_utilisateur) == 0) {
 
-            strcpy(temporaraire_status, reservation.nom[i]);
-            strcpy(reservation.nom[i], reservation.nom[j]);
-            strcpy(reservation.nom[j], temporaraire_status);
+            status_correspondantes[corres_status] = i;
+            corres_status++; 
 
+        }else{
+
+            rest_status[autre_status] = i;
+            autre_status++; 
         }
-
     }
 
-    afficher_tout_reservation(Nbr_reservation);
+    for (int i = 0; i < Nbr_reservation; i++)
+    {
+        // for (int j = 0; i < corres_status; i++)
+        //     {
+                if(status_correspondantes[i] == reservation.status[i]){
+
+                printf("\n\n==============================\n");
+                printf("       Reservation | %d       \n", reservation.id[i]);
+                printf("==============================\n\n");
+
+                printf("  ==> Id:          %d\n\n", reservation.id[i]);
+                printf("  ==> Nom:         %s\n\n", reservation.nom[i]);
+                printf("  ==> Prenom:      %s\n\n", reservation.prenom[i]);
+                printf("  ==> Tele:        %s\n\n", reservation.tele[i]);
+                printf("  ==> Age:         %d\n\n", reservation.age[i]);
+                printf("  ==> Status:      %s\n\n", reservation.status[i]);
+                printf("  ==> Date:        %s\n\n", reservation.dateReservation[i]);
+
+                printf("==============================\n");
+            }else{
+                continue;
+            }
+        // }
+       
+    }
+    for (int i = 0; i < Nbr_reservation; i++)
+    {
+        if(reservation.status[i] == rest_status[i]){
+
+            printf("\n\n==============================\n");
+            printf("       Reservation | %d       \n", reservation.id[i]);
+            printf("==============================\n\n");
+
+            printf("  ==> Id:          %d\n\n", reservation.id[i]);
+            printf("  ==> Nom:         %s\n\n", reservation.nom[i]);
+            printf("  ==> Prenom:      %s\n\n", reservation.prenom[i]);
+            printf("  ==> Tele:        %s\n\n", reservation.tele[i]);
+            printf("  ==> Age:         %d\n\n", reservation.age[i]);
+            printf("  ==> Status:      %s\n\n", reservation.status[i]);
+            printf("  ==> Date:        %s\n\n", reservation.dateReservation[i]);
+
+            printf("==============================\n");
+        }else{
+            continue;
+        }
+    }
+    
+
+    // afficher_tout_reservation(Nbr_reservation);
 
 }
 
