@@ -296,14 +296,33 @@ int ajouter_simple_reservation(int Nbr_reservation)
     printf("\n\nDonner Prenom | %d | : ", Nbr_reservation + 1);
     scanf("%s", reservation.prenom[Nbr_reservation]);
 
-    printf("\n\nDonner Numero de telephone | %d | : ", Nbr_reservation + 1);
-    scanf("%s", reservation.tele[Nbr_reservation]);
+    char temporaire_Telephone[maxCaractere];
+
+    int valid_Telephone = 0;
+    while (!valid_Telephone)
+    {
+        printf("\n\nDonner Numero de telephone | %d | (maximum 12 caracteres, commence par 05, 06 ou 07) : ", Nbr_reservation + 1);
+        scanf("%s", temporaire_Telephone);
+
+        if (strlen(temporaire_Telephone) <= 12 &&
+            (temporaire_Telephone[0] == '0' && (temporaire_Telephone[1] == '5' || temporaire_Telephone[1] == '6' || temporaire_Telephone[1] == '7')))
+        {
+
+            strcpy(reservation.tele[Nbr_reservation], temporaire_Telephone);
+            valid_Telephone = 1;
+        }
+        else
+        {
+            printf("\n\n\t-->Le numero de telephone doit commencer par 05, 06 ou 07 et ne doit pas depasser 12 caracteres. Veuillez essayer a nouveau.\n");
+        }
+    }
 
     printf("\n\nDonner Age | %d | : ", Nbr_reservation + 1);
     scanf("%d", &reservation.age[Nbr_reservation]);
 
     char temporaire_Status[maxCaractere];
     int valid_Status = 0;
+
     while (!valid_Status)
     {
         printf("\n\nDonner Statut (valide, reporte, annule, traite) | %d | : ", Nbr_reservation + 1);
@@ -322,8 +341,41 @@ int ajouter_simple_reservation(int Nbr_reservation)
         }
     }
 
-    printf("\n\nDonner Date de Reservation (YYYY-MM-DD) | %d | : ", Nbr_reservation + 1);
-    scanf("%s", reservation.dateReservation[Nbr_reservation]);
+    char dateTemporaire[maxCaractere];
+    int annee, mois, jour;
+    int dateValide = 0;
+
+    while (!dateValide)
+    {
+        printf("\n\nDonner Date de Reservation (YYYY-MM-DD) | %d | : ", Nbr_reservation + 1);
+        scanf("%s", dateTemporaire);
+
+        if (strlen(dateTemporaire) == 10 && dateTemporaire[4] == '-' && dateTemporaire[7] == '-')
+        {
+
+            sscanf(dateTemporaire, "%d-%d-%d", &annee, &mois, &jour);
+
+            /*
+            Extrait l'annee, le mois et le jour de la chaîne dateTemporaire en utilisant la fonction sscanf,
+            qui place les valeurs extraites dans les variables annee, mois, et jour.
+             */
+
+            if (annee < 2025 && mois >= 1 && mois <= 12 && jour >= 1 && jour <= 31)
+            {
+                dateValide = 1;
+            }
+            else
+            {
+                printf("\n\n\t-->Date invalide! L'annee doit etre < 2025, le mois entre 1 et 12, le jour entre 1 et 31.\n");
+            }
+        }
+        else
+        {
+            printf("\n\n\t-->Format invalide! Veuillez entrer une date au format YYYY-MM-DD.\n");
+        }
+    }
+
+    strcpy(reservation.dateReservation[Nbr_reservation], dateTemporaire);
 
     reservation.id[Nbr_reservation] = Nbr_reservation + 1;
     Nbr_reservation++;
@@ -374,9 +426,41 @@ int ajouter_multiple_reservation(int Nbr_reservation)
                 printf("\n\n\t-->Statut invalide. Veuillez entrer l'un des suivants: valide, reporte, annule, traite.\n");
             }
         }
+        char dateTemporaire[maxCaractere];
+        int annee, mois, jour;
+        int dateValide = 0;
 
-        printf("\n\nDonner Date de Reservation (YYYY-MM-DD) | %d | : ", Nbr_reservation + 1);
-        scanf("%s", reservation.dateReservation[Nbr_reservation]);
+        while (!dateValide)
+        {
+            printf("\n\nDonner Date de Reservation (YYYY-MM-DD) | %d | : ", Nbr_reservation + 1);
+            scanf("%s", dateTemporaire);
+
+            if (strlen(dateTemporaire) == 10 && dateTemporaire[4] == '-' && dateTemporaire[7] == '-')
+            {
+
+                sscanf(dateTemporaire, "%d-%d-%d", &annee, &mois, &jour);
+
+                /*
+                Extrait l'annee, le mois et le jour de la chaîne dateTemporaire en utilisant la fonction sscanf,
+                qui place les valeurs extraites dans les variables annee, mois, et jour.
+                 */
+
+                if (annee < 2025 && mois >= 1 && mois <= 12 && jour >= 1 && jour <= 31)
+                {
+                    dateValide = 1;
+                }
+                else
+                {
+                    printf("\n\n\t-->Date invalide! L'annee doit etre < 2025, le mois entre 1 et 12, le jour entre 1 et 31.\n");
+                }
+            }
+            else
+            {
+                printf("\n\n\t-->Format invalide! Veuillez entrer une date au format YYYY-MM-DD.\n");
+            }
+        }
+
+        strcpy(reservation.dateReservation[Nbr_reservation], dateTemporaire);
 
         reservation.id[Nbr_reservation] = Nbr_reservation + 1;
 
@@ -496,8 +580,41 @@ void Modifier_Reservation(int Nbr_reservation)
                 }
             }
 
-            printf("\n\nDonner Date de Reservation (YYYY-MM-DD) : ");
-            scanf("%s", reservation.dateReservation[i]);
+            char dateTemporaire[maxCaractere];
+            int annee, mois, jour;
+            int dateValide = 0;
+
+            while (!dateValide)
+            {
+                printf("\n\nDonner Date de Reservation (YYYY-MM-DD) : ");
+                scanf("%s", dateTemporaire);
+
+                if (strlen(dateTemporaire) == 10 && dateTemporaire[4] == '-' && dateTemporaire[7] == '-')
+                {
+
+                    sscanf(dateTemporaire, "%d-%d-%d", &annee, &mois, &jour);
+
+                    /*
+                    Extrait l'annee, le mois et le jour de la chaîne dateTemporaire en utilisant la fonction sscanf,
+                    qui place les valeurs extraites dans les variables annee, mois, et jour.
+                     */
+
+                    if (annee < 2025 && mois >= 1 && mois <= 12 && jour >= 1 && jour <= 31)
+                    {
+                        dateValide = 1;
+                    }
+                    else
+                    {
+                        printf("\n\n\t-->Date invalide! L'annee doit etre < 2025, le mois entre 1 et 12, le jour entre 1 et 31.\n");
+                    }
+                }
+                else
+                {
+                    printf("\n\n\t-->Format invalide! Veuillez entrer une date au format YYYY-MM-DD.\n");
+                }
+            }
+
+            strcpy(reservation.dateReservation[i], dateTemporaire);
 
             printf("\n\nDonner nouveau tele : ");
             scanf("%s", reservation.tele[i]);
@@ -812,10 +929,6 @@ void statistiques_nbr_patient_par_age(int Nbr_reservation)
 
                 valide_par_age_moin_dix_huit[0] += 1;
             }
-            else
-            {
-                printf("\n\n\t-->L'age doit etre supereriour a 0");
-            }
         }
         else if (strcmp(reservation.status[i], "traite") == 0)
         {
@@ -834,10 +947,6 @@ void statistiques_nbr_patient_par_age(int Nbr_reservation)
             {
 
                 valide_par_age_moin_dix_huit[1] += 1;
-            }
-            else
-            {
-                printf("\n\n\t-->L'age doit etre supereriour a 0");
             }
         }
         else if (strcmp(reservation.status[i], "annule") == 0)
@@ -858,9 +967,6 @@ void statistiques_nbr_patient_par_age(int Nbr_reservation)
 
                 valide_par_age_moin_dix_huit[2] += 1;
             }
-            {
-                printf("\n\n\t-->L'age doit etre supereriour a 0");
-            }
         }
         else if (strcmp(reservation.status[i], "reporte") == 0)
         {
@@ -879,10 +985,6 @@ void statistiques_nbr_patient_par_age(int Nbr_reservation)
             {
 
                 valide_par_age_moin_dix_huit[3] += 1;
-            }
-            else
-            {
-                printf("\n\n\t-->L'age doit etre supereriour a 0");
             }
         }
     }
@@ -905,7 +1007,6 @@ void statistiques_nbr_patient_par_age(int Nbr_reservation)
 }
 
 void statistiques_nbr_reservation_par_statut(int Nbr_reservation)
-
 {
     int valide_Nbr_total_reservation = 0;
     int traite_Nbr_total_reservation = 0;
