@@ -869,6 +869,7 @@ void statistiques_nbr_patient_par_age(int Nbr_reservation)
 }
 
 void statistiques_nbr_reservation_par_statut(int Nbr_reservation)
+
 {
     int valide_Nbr_total_reservation = 0;
     int traite_Nbr_total_reservation = 0;
